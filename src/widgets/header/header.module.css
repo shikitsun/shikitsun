@@ -1,0 +1,6 @@
+.link {
+  color: var(--color-text-secondary);
+  font-size: var(--text-sm);
+  line-height: var(--leading-tight);
+  font-weight: 500;
+}

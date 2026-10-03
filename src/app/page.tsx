@@ -1,3 +1,9 @@
+import { Header } from "../widgets/header/Header";
+
 export default function Home() {
-  return <main></main>;
+  return (
+    <main>
+      <Header />
+    </main>
+  );
 }
