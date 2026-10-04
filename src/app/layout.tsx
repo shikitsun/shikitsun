@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import content from "@/src/content/author.json";
 import RegisterElements from "../shared/ui/web/RegisterElements";
+import { getAuthor } from "../entities/api/author";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,9 +14,11 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const author = await getAuthor();
+
 export const metadata: Metadata = {
-  title: `${content.name}: ${content.title}`,
-  description: `Personal site of ${content.name}, the ${content.title}`,
+  title: `${author.name}: ${author.title}`,
+  description: `Personal site of ${author.name}, the ${author.title}`,
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

@@ -1,12 +1,13 @@
-import content from "@/src/content/author.json";
+import { getAuthor } from "@/src/entities/api/author";
 import styles from "./header.module.css";
 
-const NAME_INITIALS = content.name
-  .split(" ")
-  .map((p) => p.charAt(0))
-  .join("");
+export async function Header() {
+  const author = await getAuthor();
+  const NAME_INITIALS = author.name
+    .split(" ")
+    .map((p) => p.charAt(0))
+    .join("");
 
-export function Header() {
   return (
     <header className="flex items-center justify-between h-30 border-b border-line">
       <div className="flex items-center gap-x-3">
@@ -18,8 +19,8 @@ export function Header() {
         </div>
 
         <div className="flex flex-col gap-y-0.5">
-          <h1 className="text-md leading-tight">{content.name}</h1>
-          <p className="note-text">{content.title}</p>
+          <h1 className="text-md leading-tight">{author.name}</h1>
+          <p className="note-text">{author.title}</p>
         </div>
       </div>
 
@@ -36,7 +37,7 @@ export function Header() {
       </nav>
 
       <div className="max-sm:hidden">
-        {content.seeking_for_work ? (
+        {author.seeking_for_work ? (
           <p className="status-pill">
             <span className="dot variant--size-md text-accent-green"></span>
             Open to work

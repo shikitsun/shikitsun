@@ -1,6 +1,6 @@
 "use client";
 
-import data from "@/src/content/hero/code.json";
+import { getCodeAbout } from "@/src/entities/api/about";
 import { Meter } from "@/src/shared/ui/Meter";
 import {
   lazy,
@@ -51,7 +51,11 @@ function MetricValue({
   );
 }
 
-export default function ExampleWithMetrics() {
+interface IExampleWithMetricsProps {
+  data: Awaited<ReturnType<typeof getCodeAbout>>;
+}
+
+export default function ExampleWithMetrics({ data }: IExampleWithMetricsProps) {
   return (
     <div className="flex flex-col gap-y-5">
       <Suspense

@@ -1,7 +1,7 @@
 "use client";
-import data from "@/src/content/hero/short_about.json";
-import author from "@/src/content/author.json";
-import { Fragment, PropsWithChildren } from "react";
+import { getShortAbout } from "@/src/entities/api/about";
+import { getAuthor } from "@/src/entities/api/author";
+import { PropsWithChildren } from "react";
 
 interface IStatProps extends PropsWithChildren {
   value: string;
@@ -22,7 +22,12 @@ function Stat({ value, children, highlight }: IStatProps) {
   );
 }
 
-export function ShortAbout() {
+interface IShortAboutProps {
+  author: Awaited<ReturnType<typeof getAuthor>>;
+  data: Awaited<ReturnType<typeof getShortAbout>>;
+}
+
+export function ShortAbout({ author, data }: IShortAboutProps) {
   return (
     <div className="flex flex-col lg:gap-y-5.5 md:gap-y-7 gap-y-5 fade-in">
       {author.available_for && (
