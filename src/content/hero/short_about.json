@@ -1,0 +1,15 @@
+{
+  "title": "Senior Frontend Engineer who ships <c-h>fast, robust, maintanable and accessible interfaces.</c-h>",
+  "description": "Six years building product UIs in <c-h c='#DD0031'>Angular</c-h> and <c-h c='var(--color-accent-blue)'>React</c-h>. I love <c-h>creating</c-h> useful applications with most best <c-h c='var(--color-accent-amber)'>UI/UX</c-h> which are supported by good <c-h c='var(--color-accent-green)'>DX</c-h>",
+  "stats": [
+    {
+      "value": "6",
+      "title": "Years shipping",
+      "highlight": true
+    },
+    {
+      "value": "14+",
+      "title": "Products shipped"
+    }
+  ]
+}
