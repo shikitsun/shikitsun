@@ -19,13 +19,11 @@ export function Header() {
 
         <div className="flex flex-col gap-y-0.5">
           <h1 className="text-md leading-tight">{content.name}</h1>
-          <p className="text-prefix-sm tracking-wider text-text-muted uppercase">
-            {content.title}
-          </p>
+          <p className="note-text">{content.title}</p>
         </div>
       </div>
 
-      <nav className="flex items-center gap-x-8">
+      <nav className="flex items-center gap-x-8 max-sm:hidden">
         <a className={styles.link} href="#stack">
           Stack
         </a>
@@ -37,7 +35,7 @@ export function Header() {
         </a>
       </nav>
 
-      <div>
+      <div className="max-sm:hidden">
         {content.seeking_for_work ? (
           <p className="status-pill">
             <span className="dot variant--size-md text-accent-green"></span>
