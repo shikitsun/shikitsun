@@ -32,10 +32,13 @@
   --text-header--line-height: 1.2;
   --text-header--font-weight: 700;
 
-  --text-subheader: 0.625rem;
-  --text-subheader--line-height: 1.2;
-  --text-subheader--letter-spacing: 1.6;
-  --text-subheader--font-weight: 600;
+  --text-category: 0.625rem;
+  --text-category--line-height: 1.2;
+  --text-category--letter-spacing: 1.6;
+  --text-category--font-weight: 600;
+
+  --text-subheader: var(--text-sm);
+  --text-subheader--line-height: 1.5;
 
   --spacing-container: 5rem;
 }
@@ -156,10 +159,22 @@
   }
 
   .fade-in {
-    transition: translate 250ms linear;
+    transition:
+      translate 250ms linear,
+      opacity 250ms linear;
+
+    transition-delay: 550ms;
 
     @starting-style {
       translate: 0 0.5rem;
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fade-in {
+      transition: unset !important;
+      transition-delay: 0 !important;
     }
   }
 }

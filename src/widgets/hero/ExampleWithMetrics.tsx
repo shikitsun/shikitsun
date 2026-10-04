@@ -20,6 +20,7 @@ interface IMetricProps extends PropsWithChildren {
   className?: string;
   unit?: ReactNode;
   metricCallback: (cb: (metric: IMetric) => void) => void;
+  containerClassName?: string;
 }
 
 function MetricValue({
@@ -29,6 +30,7 @@ function MetricValue({
   children,
   unit,
   className,
+  containerClassName,
 }: IMetricProps) {
   const [value, setValue] = useState(0);
   const val = max - value;
@@ -38,7 +40,9 @@ function MetricValue({
   }, [metricCallback]);
 
   return (
-    <li className="flex flex-col card fade-in delay-250 gap-y-6 py-4 px-4">
+    <li
+      className={`flex flex-col card fade-in delay-350 gap-y-6 py-4 px-4 ${containerClassName ?? ""}`}
+    >
       <h6 className="text-[0.625rem] text-text-muted font-semibold tracking-widest">
         {children}
       </h6>
@@ -61,7 +65,7 @@ export default function ExampleWithMetrics({ data }: IExampleWithMetricsProps) {
       <Suspense
         fallback={<div className="skeleton w-screen max-w-lg h-96"></div>}
       >
-        <CodeBlock className="fade-in delay-150">{data.codeExample}</CodeBlock>
+        <CodeBlock className="fade-in delay-450">{data.codeExample}</CodeBlock>
       </Suspense>
 
       <ul className="grid grid-cols-3 items-center gap-x-4">
@@ -79,6 +83,7 @@ export default function ExampleWithMetrics({ data }: IExampleWithMetricsProps) {
           max={0.5}
           metricCallback={onCLS}
           className="text-accent-violet"
+          containerClassName="delay-500"
         >
           CLS
         </MetricValue>
@@ -88,6 +93,7 @@ export default function ExampleWithMetrics({ data }: IExampleWithMetricsProps) {
           metricCallback={onINP}
           unit="ms"
           className="text-accent-green"
+          containerClassName="delay-600"
         >
           INP
         </MetricValue>

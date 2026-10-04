@@ -29,9 +29,9 @@ interface IShortAboutProps {
 
 export function ShortAbout({ author, data }: IShortAboutProps) {
   return (
-    <div className="flex flex-col lg:gap-y-5.5 md:gap-y-7 gap-y-5 fade-in">
+    <div className="flex flex-col lg:gap-y-5.5 md:gap-y-7 gap-y-5 fade-in delay-250">
       {author.available_for && (
-        <p className="status-pill w-fit">
+        <p className="status-pill w-fit fade-in delay-500">
           <span className="dot variant--size-md text-accent-green"></span>
           Available for {author.available_for} roles
         </p>
@@ -43,14 +43,14 @@ export function ShortAbout({ author, data }: IShortAboutProps) {
       ></h2>
 
       <h3
-        className="lg:text-md text-sm text-text-secondary"
+        className="lg:text-md text-sm text-text-secondary fade-in delay-300"
         dangerouslySetInnerHTML={{ __html: data.description }}
       ></h3>
 
       {!!data.stats.length && (
         <>
           <hr className="separator" />
-          <dl className="grid grid-cols-4 items-center gap-x-2.5 max-sm:grid-cols-2">
+          <dl className="grid grid-cols-4 items-center gap-x-2.5 max-sm:grid-cols-2 fade-in delay-500">
             {data.stats.map((stat, idx, arr) => (
               <div key={idx} className="flex items-center gap-x-2.5">
                 <Stat value={stat.value} highlight={stat.highlight}>
