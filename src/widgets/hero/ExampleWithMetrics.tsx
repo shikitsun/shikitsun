@@ -38,7 +38,7 @@ function MetricValue({
   }, [metricCallback]);
 
   return (
-    <li className="flex flex-col card fade-in gap-y-6 py-4 px-4">
+    <li className="flex flex-col card fade-in delay-250 gap-y-6 py-4 px-4">
       <h6 className="text-[0.625rem] text-text-muted font-semibold tracking-widest">
         {children}
       </h6>
@@ -57,7 +57,7 @@ export default function ExampleWithMetrics() {
       <Suspense
         fallback={<div className="skeleton w-screen max-w-lg h-96"></div>}
       >
-        <CodeBlock className="fade-in">{data.codeExample}</CodeBlock>
+        <CodeBlock className="fade-in delay-150">{data.codeExample}</CodeBlock>
       </Suspense>
 
       <ul className="grid grid-cols-3 items-center gap-x-4">

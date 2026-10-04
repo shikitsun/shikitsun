@@ -43,7 +43,7 @@ export default function CodeBlock({
       </header>
 
       <div className="py-5 px-4">
-        <pre ref={ref} className="bg-transparent!">
+        <pre ref={ref} className="bg-transparent! max-sm:text-xs!">
           <code>{children}</code>
         </pre>
       </div>

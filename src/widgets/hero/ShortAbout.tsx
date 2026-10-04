@@ -24,7 +24,7 @@ function Stat({ value, children, highlight }: IStatProps) {
 
 export function ShortAbout() {
   return (
-    <div className="flex flex-col lg:gap-y-5.5 md:gap-y-7 gap-y-5">
+    <div className="flex flex-col lg:gap-y-5.5 md:gap-y-7 gap-y-5 fade-in">
       {author.available_for && (
         <p className="status-pill w-fit">
           <span className="dot variant--size-md text-accent-green"></span>
