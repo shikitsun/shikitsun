@@ -101,12 +101,18 @@
     text-transform: uppercase;
   }
 
+  /* could use components for convience as well */
+  /* but keep that for slightly faster loading */
   .dot {
     --size: 0.5rem;
     border-radius: 100%;
     background-color: currentColor;
     width: var(--size);
     height: var(--size);
+
+    &.variant--size-lg {
+      --size: 0.625rem;
+    }
 
     &.variant--size-md {
       --size: 0.4375rem;
@@ -128,6 +134,26 @@
       height: 100%;
     }
   }
+
+  .card {
+    border: 1px solid var(--color-line);
+    background-color: var(--color-surface);
+    border-radius: var(--radius-xl);
+  }
+
+  .skeleton {
+    border-radius: var(--radius-md);
+    animation: pulse 250ms linear infinite both;
+    background-color: var(--color-gray-500);
+  }
+
+  .fade-in {
+    transition: translate 250ms linear;
+
+    @starting-style {
+      translate: 0 0.5rem;
+    }
+  }
 }
 
 @layer utils {
@@ -137,5 +163,11 @@
     color: var(--color-text-muted);
     text-transform: uppercase;
     font-weight: 500;
+  }
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.5;
   }
 }
