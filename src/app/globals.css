@@ -15,11 +15,7 @@
 
   --color-bg-alt: oklch(0.1637 0.0182 263.88);
   --color-bg-deep: oklch(0.1404 0.0138 268.45);
-  --color-bg-surface: linear-gradient(
-    to bottom,
-    var(--color-surface) 0%,
-    var(--color-bg-deep) 62%
-  );
+  --color-bg-surface: oklch(0.1845 0.0347 265.25);
 
   --color-text-muted: oklch(0.5209 0.0388 259.37);
   --color-text-primary: oklch(0.9446 0.012 259.82);
@@ -31,6 +27,15 @@
   --text-md: 1rem;
   --text-prefix-md: 0.5625rem;
   --text-prefix-sm: 0.5rem;
+
+  --text-header: 2.5rem;
+  --text-header--line-height: 1.2;
+  --text-header--font-weight: 700;
+
+  --text-subheader: 0.625rem;
+  --text-subheader--line-height: 1.2;
+  --text-subheader--letter-spacing: 1.6;
+  --text-subheader--font-weight: 600;
 
   --spacing-container: 5rem;
 }
@@ -58,7 +63,8 @@
   main {
     --max-width: 75rem;
     & > * {
-      max-width: min(var(--max-width), calc(100vw - 2.5rem));
+      --container-width: min(var(--max-width), calc(100vw - 2.5rem));
+      max-width: var(--container-width);
       margin: 0 auto;
     }
   }
@@ -66,6 +72,7 @@
   @media (width <= 48rem) {
     :root {
       --spacing-container: 3.5rem;
+      --text-header: 1.875rem;
     }
 
     main {
@@ -76,6 +83,7 @@
   @media (width <= 24.375rem) {
     :root {
       --spacing-container: 2.5rem;
+      --text-header: 10.5rem;
     }
 
     main {
