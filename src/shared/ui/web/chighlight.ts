@@ -12,5 +12,6 @@ export class CHighlighComponent extends HTMLElement {
       "color",
       this.getAttribute("c") || "var(--color-accent-teal)",
     );
+    this.style.display = "inline-block";
   }
 }
