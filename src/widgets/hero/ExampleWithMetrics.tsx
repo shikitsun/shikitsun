@@ -1,0 +1,93 @@
+"use client";
+
+import data from "@/src/content/hero/code.json";
+import { Meter } from "@/src/shared/ui/Meter";
+import {
+  lazy,
+  PropsWithChildren,
+  ReactNode,
+  Suspense,
+  useEffect,
+  useState,
+} from "react";
+import { onCLS, onINP, onLCP, Metric as IMetric } from "web-vitals";
+
+const CodeBlock = lazy(() => import("@/src/shared/ui/CodeBlock"));
+
+interface IMetricProps extends PropsWithChildren {
+  min: number;
+  max: number;
+  className?: string;
+  unit?: ReactNode;
+  metricCallback: (cb: (metric: IMetric) => void) => void;
+}
+
+function MetricValue({
+  min,
+  max,
+  metricCallback,
+  children,
+  unit,
+  className,
+}: IMetricProps) {
+  const [value, setValue] = useState(0);
+  const val = max - value;
+
+  useEffect(() => {
+    metricCallback((metric) => setValue(metric.value));
+  }, [metricCallback]);
+
+  return (
+    <li className="flex flex-col card fade-in gap-y-6 py-4 px-4">
+      <h6 className="text-[0.625rem] text-text-muted font-semibold tracking-widest">
+        {children}
+      </h6>
+      <p className={`text-2xl font-bold ${className ?? ""}`}>
+        {value}
+        {unit}
+      </p>
+      <Meter value={val} max={max} min={min} className={className} />
+    </li>
+  );
+}
+
+export default function ExampleWithMetrics() {
+  return (
+    <div className="flex flex-col gap-y-5">
+      <Suspense
+        fallback={<div className="skeleton w-screen max-w-lg h-96"></div>}
+      >
+        <CodeBlock className="fade-in">{data.codeExample}</CodeBlock>
+      </Suspense>
+
+      <ul className="grid grid-cols-3 items-center gap-x-4">
+        <MetricValue
+          min={0}
+          max={5}
+          metricCallback={onLCP}
+          unit="s"
+          className="text-accent-teal"
+        >
+          LCP
+        </MetricValue>
+        <MetricValue
+          min={0}
+          max={0.5}
+          metricCallback={onCLS}
+          className="text-accent-violet"
+        >
+          CLS
+        </MetricValue>
+        <MetricValue
+          min={0}
+          max={500}
+          metricCallback={onINP}
+          unit="ms"
+          className="text-accent-green"
+        >
+          INP
+        </MetricValue>
+      </ul>
+    </div>
+  );
+}

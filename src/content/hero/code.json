@@ -1,0 +1,3 @@
+{
+  "codeExample": "import { Suspense } from 'react'\nimport { HeroCanvas } from '@/ui/canvas'\n\nexport const metadata = {\n  title: 'Alexander Millenium · Frontend',\n}\n\nexport default function Page() {\n  return (\n    <Suspense fallback={<Skeleton />}>\n      <HeroCanvas lcp={1.1} cls={0.01} />\n    </Suspense>\n  )\n}"
+}
