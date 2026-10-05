@@ -1,8 +1,8 @@
 import dynamic from "next/dynamic";
 import { ShortAbout } from "./ShortAbout";
 import { Suspense } from "react";
-import { getAuthor } from "@/src/entities/api/author";
-import { getCodeAbout, getShortAbout } from "@/src/entities/api/about";
+import { getAuthor } from "@/src/entities/author/api";
+import { getCodeAbout, getShortAbout } from "@/src/entities/about/api";
 
 const Metrics = dynamic(() => import("@/src/widgets/hero/ExampleWithMetrics"));
 

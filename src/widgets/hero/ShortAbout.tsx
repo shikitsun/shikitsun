@@ -1,6 +1,6 @@
 "use client";
-import { getShortAbout } from "@/src/entities/api/about";
-import { getAuthor } from "@/src/entities/api/author";
+import { getShortAbout } from "@/src/entities/about/api";
+import { getAuthor } from "@/src/entities/author/api";
 import { PropsWithChildren } from "react";
 
 interface IStatProps extends PropsWithChildren {

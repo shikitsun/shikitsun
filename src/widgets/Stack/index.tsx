@@ -1,5 +1,5 @@
-import { getStackSkills, getStackTypes } from "@/src/entities/api/stack";
-import { Skills } from "@/src/entities/ui/skills";
+import { getStackSkills, getStackTypes } from "@/src/entities/stack/api";
+import { Skills } from "@/src/entities/stack/ui";
 import { SectionHeader } from "@/src/shared/ui/section/Header";
 import { Fragment } from "react/jsx-runtime";
 

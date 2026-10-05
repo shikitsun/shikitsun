@@ -1,5 +1,5 @@
 import { ComponentProps } from "react";
-import { IStackSkill, IStackType } from "../../api/stack";
+import { IStackSkill, IStackType } from "./../api/index";
 
 interface ISkillsProps {
   type: IStackType;

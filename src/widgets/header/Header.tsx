@@ -1,4 +1,4 @@
-import { getAuthor } from "@/src/entities/api/author";
+import { getAuthor } from "@/src/entities/author/api";
 import styles from "./header.module.css";
 
 export async function Header() {
