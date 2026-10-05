@@ -1,7 +1,7 @@
 "use client";
 
-import { getCodeAbout } from "@/src/entities/api/about";
-import { Meter } from "@/src/shared/ui/Meter";
+import { getCodeAbout } from "@/src/entities/about/api";
+import { Meter } from "@/src/shared/lib/ui/Meter";
 import {
   lazy,
   PropsWithChildren,
@@ -12,7 +12,7 @@ import {
 } from "react";
 import { onCLS, onINP, onLCP, Metric as IMetric } from "web-vitals";
 
-const CodeBlock = lazy(() => import("@/src/shared/ui/CodeBlock"));
+const CodeBlock = lazy(() => import("@/src/shared/lib/ui/CodeBlock"));
 
 interface IMetricProps extends PropsWithChildren {
   min: number;

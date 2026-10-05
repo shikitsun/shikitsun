@@ -169,7 +169,7 @@
     background-color: var(--color-gray-500);
   }
 
-  .fade-in {
+  .fade-in:not([data-hold-animations]) {
     transition:
       translate 250ms linear,
       opacity 250ms linear;

@@ -1,4 +1,4 @@
-import { percentOf } from "../utils";
+import { percentOf } from "../../utils";
 
 interface IMeterProps {
   min: number;
