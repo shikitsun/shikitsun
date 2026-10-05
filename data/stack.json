@@ -1,0 +1,156 @@
+{
+  "types": [
+    {
+      "name": "Languages",
+      "color": "var(--color-accent-teal)"
+    },
+    {
+      "name": "Frameworks",
+      "color": "var(--color-accent-violet)"
+    },
+    {
+      "name": "Libraries",
+      "color": "var(--color-accent-blue)"
+    },
+    {
+      "name": "Styling & Design Systems",
+      "color": "var(--color-accent-amber)"
+    },
+    {
+      "name": "Testing & Quality",
+      "color": "var(--color-accent-pink)"
+    },
+    {
+      "name": "Platform & Tooling",
+      "color": "var(--color-accent-green)"
+    }
+  ],
+  "stack": [
+    {
+      "type": "Languages",
+      "skills": [
+        {
+          "name": "TypeScript"
+        },
+        {
+          "name": "HTML5 + CSS3"
+        },
+        {
+          "name": "Python"
+        },
+        {
+          "name": "JavaScript ES2025"
+        },
+        {
+          "name": "Rust (basics)"
+        }
+      ]
+    },
+    {
+      "type": "Frameworks",
+      "skills": [
+        {
+          "name": "Next.js 16"
+        },
+        {
+          "name": "React 19"
+        },
+        {
+          "name": "Astro"
+        },
+        {
+          "name": "Nuxt"
+        },
+        {
+          "name": "Vue 3"
+        },
+        {
+          "name": "Node.js"
+        }
+      ]
+    },
+    {
+      "type": "Libraries",
+      "skills": [
+        {
+          "name": "TanStack Query"
+        },
+        {
+          "name": "Redux Toolkit"
+        },
+        {
+          "name": "Framer Motion"
+        },
+        {
+          "name": "Zustand"
+        },
+        {
+          "name": "Radix UI"
+        },
+        {
+          "name": "Zod"
+        }
+      ]
+    },
+    {
+      "type": "Styling & Design Systems",
+      "skills": [
+        {
+          "name": "Tailwind CSS v4"
+        },
+        {
+          "name": "SCSS"
+        },
+        {
+          "name": "Storybook"
+        },
+        {
+          "name": "CSS Modules"
+        },
+        {
+          "name": "shadcn/ui"
+        },
+        {
+          "name": "Design Tokens"
+        }
+      ]
+    },
+    {
+      "type": "Testing & Quality",
+      "skills": [
+        {
+          "name": "Vitest"
+        },
+        {
+          "name": "Jest"
+        },
+        {
+          "name": "MSW"
+        },
+        {
+          "name": "Playwright"
+        }
+      ]
+    },
+    {
+      "type": "Platform & Tooling",
+      "skills": [
+        {
+          "name": "Vite"
+        },
+        {
+          "name": "GitHub actions"
+        },
+        {
+          "name": "npm"
+        },
+        {
+          "name": "Docker"
+        },
+        {
+          "name": "Tauri"
+        }
+      ]
+    }
+  ]
+}
