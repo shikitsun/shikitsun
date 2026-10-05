@@ -169,7 +169,7 @@
     background-color: var(--color-gray-500);
   }
 
-  .fade-in:not([data-hold-animations]) {
+  .fade-in {
     transition:
       translate 250ms linear,
       opacity 250ms linear;
@@ -180,6 +180,12 @@
       translate: 0 0.5rem;
       opacity: 0;
     }
+  }
+
+  .reveal {
+    animation: reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -203,5 +209,16 @@
 @keyframes pulse {
   50% {
     opacity: 0.5;
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(6.25rem) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
