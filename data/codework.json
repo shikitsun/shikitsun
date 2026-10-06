@@ -3,16 +3,16 @@
     {
       "path": "use-in-view.ts",
       "code": "import { useState, useEffect, useRef } from \"react\";\n\ninterface UseInViewOptions extends IntersectionObserverInit {\n  onChange?: (entry: IntersectionObserverEntry) => void;\n}\n\nexport function useInView<T extends HTMLElement>(options?: UseInViewOptions) {\n  const [isIntersecting, setIsIntersecting] = useState(false);\n  const elementRef = useRef<T | null>(null);\n\n  useEffect(() => {\n    const { onChange, ...observerOptions } = options || {};\n\n    const observer = new IntersectionObserver(([entry]) => {\n      setIsIntersecting(entry.isIntersecting);\n\n      if (onChange) {\n        onChange(entry);\n      }\n    }, observerOptions);\n\n    const currentElement = elementRef.current;\n\n    if (currentElement) {\n      observer.observe(currentElement);\n    }\n\n    return () => {\n      if (currentElement) {\n        observer.unobserve(currentElement);\n      }\n    };\n  }, [options]);\n\n  return [elementRef, isIntersecting] as const;\n}",
-      "description": "Detect element has intersection with optional onChange callback",
+      "description": "Element has intersection with optional callback",
       "language": "ts",
       "notes": [
         {
           "color": "var(--color-accent-teal)",
-          "description": "IntersectionObserver Observe changes in intersection of element"
+          "description": "Use native API for detecting intersection of element"
         },
         {
           "color": "var(--color-accent-violet)",
-          "description": "onChange optional callback to catch whole entry from callback"
+          "description": "Optional callback to catch whole entry"
         },
         {
           "color": "var(--color-accent-amber)",
@@ -32,11 +32,71 @@
         },
         {
           "color": "var(--color-accent-violet)",
-          "description": "JWT authentication with the ability to easily switch to cookie-based authentication"
+          "description": "JWT authentication by default"
         },
         {
           "color": "var(--color-accent-amber)",
-          "description": "Customizable error handling for status codes using different strategies: if...else, switch, or a factory pattern based on a code mapping"
+          "description": "Customizable error handling"
+        }
+      ]
+    },
+    {
+      "path": "tabs.html",
+      "code": "<style>\n\t.container:has(input[value=\"tab1\"]:not(:checked)) [data-target=\"tab1\"] {\n\t\tdisplay: none;\n\t\topacity: 0;\n\t\ttranslate: 0 0.5rem;\n\t}\n\n\t.container:has(input[value=\"tab2\"]:not(:checked)) [data-target=\"tab2\"] {\n\t\tdisplay: none;\n\t\topacity: 0;\n\t\ttranslate: 0 0.5rem;\n\t}\n\n\tinput[type=\"radio\"] {\n\t\tdisplay: none;\n\t}\n</style>\n\n<div role=\"tablist\">\n\t<label class=\"tab\">\n\t\tTab 1\n\n\t\t<input\n\t\t\ttype=\"radio\"\n\t\t\trole=\"tab\"\n\t\t\tname=\"tabs\"\n\t\t\tvalue=\"tab1\"\n\t\t\tchecked=\"\"\n\t\t/>\n\t</label>\n\n\t<label class=\"tab\">\n\t\tTab 1\n\n\t\t<input\n\t\t\ttype=\"radio\"\n\t\t\trole=\"tab\"\n\t\t\tname=\"tabs\"\n\t\t\tvalue=\"tab1\"\n\t\t\tchecked\n\t\t/>\n\t</label>\n\n\t<label class=\"tab\">\n\t\tTab 2\n\n\t\t<input\n\t\t\ttype=\"radio\"\n\t\t\trole=\"tab\"\n\t\t\tname=\"tabs\"\n\t\t\tvalue=\"tab2\"\n\t\t\tchecked\n\t\t/>\n\t</label>\n</div>\n\n<div\n\trole=\"tabpanel\"\n\tclass=\"panel\"\n\tdata-target=\"tab1\"\n>\n\tPanel content 1\n</div>\n\n<div\n\trole=\"tabpanel\"\n\tclass=\"panel\"\n\tdata-target=\"tab2\"\n>\n\tPanel content 2\n</div>",
+      "description": "Pure HTML + CSS implementation of tabs",
+      "language": "html",
+      "notes": [
+        {
+          "color": "var(--color-accent-teal)",
+          "description": "No JS - reduce bundle - good for landings"
+        },
+        {
+          "color": "var(--color-accent-violet)",
+          "description": "Utilize input radio for state tracking"
+        },
+        {
+          "color": "var(--color-accent-amber)",
+          "description": "Use data attributes for detecting panel"
+        }
+      ]
+    },
+    {
+      "path": "optimistic-mutation.jsx",
+      "code": "import {useState, useOptimistic, useActionState} from 'react';\nimport {send} from './api';\n\nfunction Component() {\n\tconst [messages, setMessages] = useState([]);\n\tconst [optMessages, setOptMessages] = useOptimistic(messages, (state, value) => [...state, value]);\n\tconst [error, action] = useActionState(async (_, formData) => {\n\t\tconst message = createMessageFromFormData(formData);\n\t\tsetOptMessages(message);\n\t\t// ...\n\t\tconst updatedMessage = await send(message);\n\t\tsetMessages((prev) => [...prev, updatedMessage]);\n\t\treturn '';\n\t}, '');\n\n\treturn <>\n\t\t{messages.map()}\n\t\t<form action={action}>...</form>\n\t</>;\n}",
+      "description": "Rollback-safe updates",
+      "language": "jsx",
+      "notes": [
+        {
+          "color": "var(--color-accent-teal)",
+          "description": "useOptimistic: messages + temporary value"
+        },
+        {
+          "color": "var(--color-accent-violet)",
+          "description": "useActionState: built-in updater with side effects"
+        },
+        {
+          "color": "var(--color-accent-amber)",
+          "description": "Rollbacks to messages when failed"
+        }
+      ]
+    },
+    {
+      "path": "focus-trap.ts",
+      "code": "export interface FocusTrapOptions {\n  container: HTMLElement;\n  exclude?: string;\n  onFocus?: (element: HTMLElement) => void;\n  onBlur?: (element: HTMLElement) => void;\n}\n\nexport class FocusTrap {\n  private readonly options: FocusTrapOptions;\n  private active = false;\n  private previouslyFocusedElement: HTMLElement | null = null;\n  private container: HTMLElement;\n  private excludeElements: Set<HTMLElement> = new Set();\n  private onFocusCallback: ((element: HTMLElement) => void) | undefined;\n  private onBlurCallback: ((element: HTMLElement) => void) | undefined;\n\n  constructor(options: FocusTrapOptions) {\n    this.container = options.container;\n    this.excludeElements = new Set();\n    this.onFocusCallback = options.onFocus ?? ((el) => {});\n    this.onBlurCallback = options.onBlur ?? ((el) => {});\n\n    if (options.exclude) {\n      const el = document.querySelector(options.exclude);\n      if (el) this.excludeElements.add(el);\n    }\n  }\n\n  activate(): void {\n    if (this.active) return;\n    this.active = true;\n    this.previouslyFocusedElement = document.activeElement as HTMLElement;\n\n    const currentFocus = document.activeElement as HTMLElement | null;\n\n    this.container.addEventListener(\"mousedown\", this.handleMouseDown);\n    this.container.addEventListener(\"keydown\", this.handleKeyDown);\n    this.container.addEventListener(\"focusin\", this.handleFocusIn);\n\n    const firstFocusable = this.getFirstFocusableElement();\n    if (firstFocusable) {\n      firstFocusable.focus();\n    } else if (this.container === document.activeElement) {\n      this.container.setAttribute(\"tabindex\", \"-1\");\n    }\n  }\n\n  deactivate(): void {\n    if (!this.active) return;\n    this.active = false;\n\n    this.container.removeEventListener(\"mousedown\", this.handleMouseDown);\n    this.container.removeEventListener(\"keydown\", this.handleKeyDown);\n    this.container.removeEventListener(\"focusin\", this.handleFocusIn);\n\n    if (this.previouslyFocusedElement) {\n      try {\n        this.previouslyFocusedElement.focus();\n      } catch {\n      }\n    } else {\n      this.container.focus();\n    }\n  }\n\n  private handleMouseDown = (e: MouseEvent): void => {\n    if (!this.container.contains(e.target as Node)) {\n      e.preventDefault();\n      this.container.focus();\n    }\n  };\n\n  private handleKeyDown = (e: KeyboardEvent): void => {\n    const tabKey = e.key === \"Tab\" || e.key === \"Shift+Tab\";\n    if (!tabKey) return;\n\n    if (!this.container.contains(document.activeElement as Node)) return;\n\n    const focusable = this.getFocusableElements();\n    if (focusable.length === 0) {\n      e.preventDefault();\n      return;\n    }\n\n    const [firstEl, lastEl] = this.getFirstAndLast(focusable);\n\n    if (e.shiftKey && document.activeElement === firstEl) {\n      e.preventDefault();\n      lastEl.focus();\n    } else if (!e.shiftKey && document.activeElement === lastEl) {\n      e.preventDefault();\n      firstEl.focus();\n    }\n  };\n\n  private handleFocusIn = (e: FocusEvent): void => {\n    const target = e.target as HTMLElement;\n    this.onFocusCallback(target);\n  };\n\n  private getFocusableElements(): HTMLElement[] {\n    return Array.from(this.container.querySelectorAll<HTMLElement>(\"[tabindex]:not([tabindex='-1'])\")).filter(\n      (el) => !this.excludeElements.has(el)\n    );\n  }\n\n  private getFirstAndLast(focusable: HTMLElement[]): [HTMLElement, HTMLElement] {\n    if (focusable.length === 0) return [this.container as HTMLElement, this.container as HTMLElement];\n    const first = focusable[0];\n    const last = focusable[focusable.length - 1];\n    return [first, last];\n  }\n\n  private getFirstFocusableElement(): HTMLElement | null {\n    const focusable = this.getFocusableElements();\n    return focusable.length > 0 ? focusable[0] : null;\n  }\n}",
+      "description": "Focus management, no deps",
+      "language": "ts",
+      "notes": [
+        {
+          "color": "var(--color-accent-teal)",
+          "description": "Control through activate and deactivate"
+        },
+        {
+          "color": "var(--color-accent-violet)",
+          "description": "Handle events such as mousedown, keydown and focusin"
+        },
+        {
+          "color": "var(--color-accent-amber)",
+          "description": "Customizable through new FocusTrap(...)"
         }
       ]
     }

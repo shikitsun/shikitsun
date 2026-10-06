@@ -27,7 +27,7 @@
     max-width: var(--container-width);
 
     & pre {
-      max-height: 24rem;
+      max-height: 21.75rem;
     }
   }
 
