@@ -21,6 +21,7 @@
   --color-text-muted: oklch(0.5209 0.0388 259.37);
   --color-text-primary: oklch(0.9446 0.012 259.82);
   --color-text-secondary: oklch(0.7053 0.036 259.41);
+  --color-text-inactive: oklch(0.3301 0.0359 258.33);
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -40,6 +41,10 @@
 
   --text-subheader: var(--text-sm);
   --text-subheader--line-height: 1.5;
+
+  --text-prefix: 0.6875rem;
+  --text-prefix--line-height: 1.2;
+  --text-prefix--font-weight: 400;
 
   --spacing-container: 5rem;
 }

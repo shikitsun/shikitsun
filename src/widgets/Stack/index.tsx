@@ -11,7 +11,7 @@ export default async function Stack() {
     <div className="bg-bg-alt mx-0 max-w-full">
       <section
         id="stack"
-        className="flex flex-col gap-y-6 py-container max-w-(--container-width) mx-auto"
+        className="flex flex-col gap-y-6 py-container max-w-(--container-width) mx-auto reveal"
       >
         <SectionHeader
           category={<>02 &mdash; tech stack</>}
