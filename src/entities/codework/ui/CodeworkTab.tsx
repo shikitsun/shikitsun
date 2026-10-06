@@ -2,8 +2,9 @@ import { ICodeworkItem } from "../model";
 
 interface ICodeworkTabProps extends Pick<
   ICodeworkItem,
-  "path" | "description" | "language" | "lines"
+  "path" | "description" | "language"
 > {
+  lines: number;
   defaultChecked?: boolean;
 }
 

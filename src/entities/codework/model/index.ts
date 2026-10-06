@@ -8,7 +8,6 @@ export interface ICodeworkItem {
   code: string;
   description: string;
   language: TKnownLanguages;
-  lines: number;
   notes: ICodeworkNote[];
 }
 
@@ -16,3 +15,7 @@ type TKnownLanguages = "ts";
 export const LanguageCodeMap = Object.freeze({
   ts: "typescript",
 });
+
+export function getLinesCount(code: string) {
+  return code.split("\n").length;
+}

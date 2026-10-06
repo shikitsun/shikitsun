@@ -5,7 +5,6 @@
       "code": "import { useState, useEffect, useRef } from \"react\";\n\ninterface UseInViewOptions extends IntersectionObserverInit {\n  onChange?: (entry: IntersectionObserverEntry) => void;\n}\n\nexport function useInView<T extends HTMLElement>(options?: UseInViewOptions) {\n  const [isIntersecting, setIsIntersecting] = useState(false);\n  const elementRef = useRef<T | null>(null);\n\n  useEffect(() => {\n    const { onChange, ...observerOptions } = options || {};\n\n    const observer = new IntersectionObserver(([entry]) => {\n      setIsIntersecting(entry.isIntersecting);\n\n      if (onChange) {\n        onChange(entry);\n      }\n    }, observerOptions);\n\n    const currentElement = elementRef.current;\n\n    if (currentElement) {\n      observer.observe(currentElement);\n    }\n\n    return () => {\n      if (currentElement) {\n        observer.unobserve(currentElement);\n      }\n    };\n  }, [options]);\n\n  return [elementRef, isIntersecting] as const;\n}",
       "description": "Detect element has intersection with optional onChange callback",
       "language": "ts",
-      "lines": 37,
       "notes": [
         {
           "color": "var(--color-accent-teal)",
@@ -26,7 +25,6 @@
       "code": "export async function $fetch<T>(url: string, init: RequestInit = {}) {\n  const token = \"<retrieve token logic>\";\n\n  return fetch(`${ENDPOINT}${url}`, {\n    ...init,\n    headers: Object.assign(\n      { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },\n      init.headers || {},\n    ),\n  }).then(async (response) => {\n    const content = response.headers\n      .get('Content-Type')\n      ?.includes('application/json')\n        ? ((await response.json()) as T)\n        : response;\n\n    if (!response.ok) {\n      // other codes as well could be handled there, e.g. through switch\n      // or map of {code: factory}\n      if (response.status === 401) {\n        throw APIAuthError(content);\n      } else if (response.status === 500) {\n        throw new APIError(content);\n      }\n    }\n\n    return { response, data: content as T };\n  });\n}",
       "description": "Custom wrapper around native fetch",
       "language": "ts",
-      "lines": 29,
       "notes": [
         {
           "color": "var(--color-accent-teal)",

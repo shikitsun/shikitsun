@@ -2,6 +2,7 @@ import {
   getCodework,
   CodeworkTab,
   CodeworkNotes,
+  getLinesCount,
 } from "@/src/entities/codework";
 import { SectionHeader } from "@/src/shared/lib/ui/section/Header";
 import styles from "./index.module.css";
@@ -45,7 +46,7 @@ export async function CodeWork() {
               path={example.path}
               description={example.description}
               language={example.language}
-              lines={example.lines}
+              lines={getLinesCount(example.code)}
               defaultChecked={idx === 0}
             />
           ))}
