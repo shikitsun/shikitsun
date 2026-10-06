@@ -136,6 +136,8 @@
     background-color: currentColor;
     width: var(--size);
     height: var(--size);
+    aspect-ratio: 1/1;
+    transition: background-color 250ms linear;
 
     &.variant--size-lg {
       --size: 0.625rem;
