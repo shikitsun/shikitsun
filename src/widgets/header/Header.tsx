@@ -24,9 +24,6 @@ export async function Header() {
         <a className={styles.link} href="#codework">
           Codework
         </a>
-        <a className={styles.link} href="#open">
-          Open projects
-        </a>
       </nav>
 
       <div className="max-sm:hidden">
