@@ -1,0 +1,36 @@
+.footer {
+  display: grid;
+  grid-template-areas: "head nav nav1 ." "used nav nav1 ." "copy nav nav1 ." ". nav nav1 ." ". nav nav1 .";
+  column-gap: 3.75rem;
+  row-gap: calc(var(--spacing) * 4);
+
+  & > .head {
+    grid-area: head;
+  }
+
+  & > .used {
+    grid-area: used;
+  }
+
+  & > .copy {
+    grid-area: copy;
+  }
+
+  & > .nav {
+    grid-area: nav;
+  }
+
+  & > .elsewhere {
+    grid-area: nav1;
+  }
+
+  @media (width <= 48rem) {
+    grid-template-areas: "head head" "nav nav1" "used copy";
+    row-gap: calc(var(--spacing) * 5);
+  }
+
+  @media (width <= 31.25rem) {
+    grid-template-areas: "head" "nav" "nav1" "used" "copy";
+    row-gap: calc(var(--spacing) * 4);
+  }
+}
